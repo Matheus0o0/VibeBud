@@ -1,0 +1,83 @@
+.sc-cinema { --sc-header: 84px; --sc-ink: #0b0b0c; --sc-quiet: #a3a3ad; --sc-highlight: #ff7900; position: relative; height: 400svh; background: var(--sc-ink); }
+.sc-stage { position: sticky; top: var(--sc-header); height: calc(100svh - var(--sc-header)); min-height: 520px; overflow: hidden; isolation: isolate; background: var(--sc-ink); }
+.sc-video, .sc-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.sc-poster { z-index: -3; }
+.sc-video { z-index: -2; opacity: 0; transition: opacity 450ms ease; }
+.sc-media-ready .sc-video { opacity: 1; }
+.sc-scrim { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg, var(--sc-ink) 2%, #0b0b0ce8 23%, #0b0b0c60 48%, transparent 72%), linear-gradient(0deg, var(--sc-ink), transparent 20%); }
+.sc-content { height: 100%; display: flex; flex-direction: column; justify-content: center; position: relative; }
+.sc-copy { max-width: 620px; margin-top: -55px; }
+.sc-copy > .lp-eyebrow { margin-bottom: 24px; }
+.sc-phases { display: grid; }
+.sc-phase { grid-area: 1 / 1; will-change: opacity, transform; }
+.sc-phase:not(.sc-phase-0) { opacity: 0; pointer-events: none; }
+.lp .sc-phase h1, .lp .sc-phase h2 { font-size: clamp(38px, 4.5vw, 65px); line-height: 1.08; letter-spacing: -2.5px; font-weight: 620; text-wrap: initial; }
+.sc-phase > p { max-width: 410px; font-size: 15px; line-height: 1.8; color: #b9b9c0; margin: 26px 0 28px; }
+.sc-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 22px; }
+.sc-skip { font-size: 11px; color: #b3b3bc; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.sc-skip:hover { color: var(--sc-highlight); }
+.sc-chapter { position: absolute; bottom: 52px; width: 380px; max-width: 100%; }
+.sc-chapter-label { display: flex; align-items: center; justify-content: space-between; color: #8e8e98; font-size: 8px; letter-spacing: 1.7px; }
+.sc-chapter-index { display: flex; gap: 5px; align-items: center; color: #a0a0ab; letter-spacing: 1px; }
+.sc-chapter-index i { font-style: normal; display: none; color: var(--sc-highlight); }
+.sc-stage[data-phase="0"] .sc-chapter-index i:nth-child(1), .sc-stage[data-phase="1"] .sc-chapter-index i:nth-child(2), .sc-stage[data-phase="2"] .sc-chapter-index i:nth-child(3) { display: inline; }
+.sc-journey-track { height: 2px; background: #ffffff12; margin: 13px 0 12px; }
+.sc-journey-track > span { display: block; height: 100%; background: var(--sc-highlight); box-shadow: 0 0 14px #ff790030; transform: scaleX(var(--sc-progress, 0)); transform-origin: left; }
+.sc-milestones { display: flex; justify-content: space-between; gap: 14px; }
+.sc-milestone { font-size: 10px; color: #95959e; }
+.sc-milestone[data-active="true"] { color: #efeff2; }
+.sc-scroll-hint { position: absolute; bottom: 48px; right: max(40px, calc((100vw - 1160px) / 2)); display: flex; gap: 8px; align-items: center; font-size: 10px; color: #a5a5b0; padding-block: 10px; }
+.sc-scroll-hint svg { color: var(--sc-highlight); }
+.sc-loading { position: absolute; right: 18%; top: 52%; z-index: 5; display: flex; align-items: center; gap: 9px; padding: 10px 14px; color: #cacad1; border: 1px solid #ffffff12; background: #0b0b0ce8; border-radius: 8px; font-size: 11px; pointer-events: none; }
+.sc-fallback-note { position: absolute; right: 30px; top: 22px; color: #9999a5; font-size: 10px; }
+.sc-reduced .sc-video { display: none; }
+.sc-reduced .sc-phase { will-change: auto; }
+.sc-reduced .sc-video, .sc-reduced .sc-phase { transition: none; }
+.sc-world { position: absolute; z-index: -2; left: 41%; right: -4%; top: 2%; height: 91%; opacity: 0; transition: opacity 400ms ease; }
+.sc-world canvas { display: block; width: 100%; height: 100%; }
+.sc-media-ready .sc-world { opacity: 1; }
+.sc-media-ready .sc-poster { opacity: 0; }
+.sc-poster { transition: opacity 400ms ease; }
+.sc-media-ready .sc-scrim { background: linear-gradient(90deg, var(--sc-ink) 1%, #0b0b0c90 24%, transparent 51%), linear-gradient(0deg, var(--sc-ink), transparent 15%); }
+.sc-reduced .sc-world { transition: none; }
+.sc-build-poster { inset: auto; left: 41%; top: 2%; width: 59%; height: 91%; object-fit: contain; object-position: center; }
+@media (max-width: 1100px) { .sc-copy { max-width: 540px; } .lp .sc-phase h1, .lp .sc-phase h2 { font-size: 53px; } .sc-phase > p { max-width: 350px; } }
+@media (max-width: 900px) { .sc-cinema { --sc-header: 74px; } .lp .sc-phase h1, .lp .sc-phase h2 { font-size: 46px; letter-spacing: -1.8px; } .sc-copy { max-width: 420px; } .sc-phase > p { max-width: 300px; font-size: 14px; } .sc-chapter { width: 320px; } .sc-scrim { background: linear-gradient(90deg, var(--sc-ink) 5%, #0b0b0cd9 32%, transparent 85%), linear-gradient(0deg, var(--sc-ink), transparent 20%); } }
+@media (min-width: 601px) and (max-width: 900px) and (min-height: 701px) {
+  .sc-content { justify-content: flex-start; padding-top: 30px; }
+  .sc-copy { max-width: 100%; margin-top: 0; }
+  .sc-phase > p { max-width: 440px; margin-block: 18px; }
+  .sc-world { left: 0; right: 0; top: 43%; height: 51%; }
+  .sc-build-poster { left: 0; top: 43%; width: 100%; height: 51%; }
+  .sc-chapter { bottom: 40px; }
+  .sc-scroll-hint { bottom: 36px; }
+}
+@media (max-width: 600px) {
+  .sc-cinema { --sc-header: 70px; height: 340svh; }
+  .sc-stage { min-height: 620px; }
+  .sc-content { justify-content: flex-start; padding-top: 30px; }
+  .sc-copy { max-width: 100%; margin: 0; }
+  .sc-copy > .lp-eyebrow { margin-bottom: 18px; font-size: 7px; letter-spacing: 1.1px; }
+  .lp .sc-phase h1, .lp .sc-phase h2 { font-size: clamp(30px, 9vw, 40px); letter-spacing: -1.4px; line-height: 1.07; }
+  .sc-phase > p { max-width: 315px; font-size: 12px; line-height: 1.65; margin: 16px 0 18px; }
+  .sc-actions { gap: 14px; }
+  .sc-actions .lp-button { min-height: 42px; padding-inline: 15px; font-size: 11px; gap: 7px; }
+  .sc-actions .lp-button svg { width: 13px; }
+  .sc-skip { font-size: 10px; }
+  .sc-video, .sc-poster { top: 32%; height: 66%; object-position: 87% center; mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 78%, transparent 100%); }
+  .sc-world { left: -4%; right: -4%; top: 38%; height: 57%; }
+  .sc-build-poster { left: -4%; top: 38%; width: 108%; height: 57%; object-position: center; mask-image: none; }
+  .sc-media-ready .sc-scrim { background: linear-gradient(0deg, var(--sc-ink), transparent 16%); }
+  .sc-scrim { background: linear-gradient(0deg, var(--sc-ink), transparent 22%); }
+  .sc-chapter { bottom: 45px; width: 100%; position: absolute; left: 0; padding-inline: 20px; }
+  .sc-chapter-label { font-size: 7px; }
+  .sc-milestone { font-size: 9px; }
+  .sc-scroll-hint { bottom: 6px; left: 20px; right: 20px; justify-content: center; font-size: 9px; }
+  .sc-loading { right: 50%; top: 65%; transform: translateX(50%); font-size: 10px; white-space: nowrap; }
+  .sc-fallback-note { top: auto; bottom: 115px; right: 20px; font-size: 8px; }
+}
+@media (max-height: 750px) and (min-width: 601px) { .sc-stage { min-height: 450px; } .sc-copy { margin-top: -50px; } .lp .sc-phase h1, .lp .sc-phase h2 { font-size: 45px; } .sc-phase > p { margin-block: 15px 18px; } .sc-copy > .lp-eyebrow { margin-bottom: 16px; } .sc-chapter { bottom: 24px; } .sc-scroll-hint { bottom: 20px; } }
+@media (max-width: 600px) and (max-height: 700px) { .sc-stage { min-height: 0; } .sc-content { padding-top: 18px; } .lp .sc-phase h1, .lp .sc-phase h2 { font-size: 30px; } .sc-phase > p { font-size: 11px; margin: 12px 0; max-width: 280px; } .sc-copy > .lp-eyebrow { margin-bottom: 12px; } .sc-video, .sc-poster { top: 48%; height: 47%; } .sc-chapter { bottom: 34px; } .sc-scroll-hint { bottom: 0; } }
+@media (max-height: 500px) and (min-width: 601px) { .sc-stage { min-height: 0; } .sc-copy { max-width: 380px; margin-top: 0; } .lp .sc-phase h1, .lp .sc-phase h2 { font-size: 30px; letter-spacing: -1px; } .sc-copy > .lp-eyebrow { font-size: 7px; margin-bottom: 10px; } .sc-phase > p { font-size: 11px; line-height: 1.5; max-width: 300px; margin-block: 12px; } .sc-actions .lp-button { min-height: 38px; font-size: 10px; padding-inline: 14px; } .sc-chapter { width: 220px; bottom: 15px; right: 24px; } .sc-chapter-label { font-size: 6px; letter-spacing: 1px; } .sc-milestone { font-size: 8px; } .sc-scroll-hint { display: none; } }
+@media (max-width: 600px) and (max-height: 700px) { .sc-world { top: 49%; height: 46%; } }
+@media (max-width: 600px) and (max-height: 700px) { .sc-build-poster { top: 49%; height: 46%; } }
